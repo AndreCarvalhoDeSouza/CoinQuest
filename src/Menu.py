@@ -2,7 +2,7 @@ import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from src.Const import COLOR_MENU_TITLE, COLOR_MENU_OPTIONS, WIN_WIDTH, MENU_OPTION
+from src.Const import COLOR_BRONZE, COLOR_BLACK, WIN_WIDTH, MENU_OPTION
 
 
 class Menu:
@@ -17,11 +17,11 @@ class Menu:
 
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
-            self.menu_text(100, "COIN", COLOR_MENU_TITLE, ((WIN_WIDTH/2), 70))
-            self.menu_text(100, "QUEST", COLOR_MENU_TITLE, ((WIN_WIDTH / 2), 140))
+            self.menu_text(100, "COIN", COLOR_BRONZE, ((WIN_WIDTH/2), 70))
+            self.menu_text(100, "QUEST", COLOR_BRONZE, ((WIN_WIDTH / 2), 140))
 
             for i in range(len(MENU_OPTION)):
-                self.menu_text(40, MENU_OPTION[i], COLOR_MENU_OPTIONS, ((WIN_WIDTH/2), 300 + 30 * i))
+                self.menu_text(40, MENU_OPTION[i], COLOR_BLACK, ((WIN_WIDTH/2), 300 + 30 * i))
 
             pygame.display.flip()
 
