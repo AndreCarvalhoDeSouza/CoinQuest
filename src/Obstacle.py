@@ -1,4 +1,4 @@
-from Entity import Entity
+from src.Entity import Entity
 
 class Obstacle(Entity):
 
@@ -6,7 +6,4 @@ class Obstacle(Entity):
         pass
 
     def update(self, ):
-        pass
-
-    def draw(self, ):
         pass

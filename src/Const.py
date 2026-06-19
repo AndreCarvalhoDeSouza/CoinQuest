@@ -1,10 +1,10 @@
-#C
+#Colors
 COLOR_GOLD = (162, 169, 29)
 COLOR_BLACK = (0, 0, 0)
 COLOR_BRONZE = (205, 127, 50)
 COLOR_WHITE = (255, 255, 255)
 
-#E
+#Entities
 ENTITY_LEVEL1_SPEED = {
     'level1_background0': 0,
     'level1_background1': 4,
@@ -13,7 +13,7 @@ ENTITY_LEVEL1_SPEED = {
     'level1_background4': 16,
 }
 
-#I
+#Instructions
 INSTRUCTION = {
     '>': 'Left (>) - Run',
     '<': 'Right (<) - Walk',
@@ -21,12 +21,12 @@ INSTRUCTION = {
     'Esc': 'Esc - Exit'
 }
 
-#M
+#Menu
 MENU_OPTION = ("Game - With Player",
                "Instruction",
                "Score",
                 "Exit")
 
-#W
+#Windows
 WIN_WIDTH = 960
 WIN_HEIGHT = 540

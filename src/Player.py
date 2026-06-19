@@ -1,4 +1,4 @@
-from Entity import Entity
+from src.Entity import Entity
 
 class Player(Entity):
 
@@ -6,7 +6,4 @@ class Player(Entity):
         pass
 
     def update(self, ):
-        pass
-
-    def draw(self, ):
         pass

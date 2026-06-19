@@ -1,4 +1,4 @@
-from Entity import Entity
+from src.Entity import Entity
 
 class Coin(Entity):
 
@@ -6,7 +6,4 @@ class Coin(Entity):
         pass
 
     def update(self, ):
-        pass
-
-    def draw(self, ):
         pass
