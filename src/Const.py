@@ -2,6 +2,7 @@
 COLOR_GOLD = (162, 169, 29)
 COLOR_BLACK = (0, 0, 0)
 COLOR_BRONZE = (205, 127, 50)
+COLOR_WHITE = (255, 255, 255)
 
 #E
 ENTITY_LEVEL1_SPEED = {
@@ -14,7 +15,10 @@ ENTITY_LEVEL1_SPEED = {
 
 #I
 INSTRUCTION = {
-
+    '>': 'Left (>) - Run',
+    '<': 'Right (<) - Walk',
+    'SPACE': 'Space - Jump',
+    'Esc': 'Esc - Exit'
 }
 
 #M
