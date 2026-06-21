@@ -1,9 +1,10 @@
+from src.Const import ENTITY_LEVEL1_SPEED, WIN_WIDTH
 from src.Entity import Entity
 
 class Obstacle(Entity):
 
-    def __init__(self):
-        pass
+    def __init__(self, name: str, position: tuple):
+        super().__init__(name, position)
 
     def update(self, ):
-        pass
+        self.rect.centerx -= ENTITY_LEVEL1_SPEED[self.name]

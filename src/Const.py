@@ -1,8 +1,14 @@
+import pygame
+
+#Coin
+COIN_SIZE = (32, 32)
+
 #Colors
 COLOR_GOLD = (162, 169, 29)
 COLOR_BLACK = (0, 0, 0)
 COLOR_BRONZE = (205, 127, 50)
 COLOR_WHITE = (255, 255, 255)
+COLOR_RED = (255, 0, 0)
 
 #Entities
 ENTITY_LEVEL1_SPEED = {
@@ -11,7 +17,19 @@ ENTITY_LEVEL1_SPEED = {
     'level1_background2': 8,
     'level1_background3': 12,
     'level1_background4': 16,
+    'player_walk': 3,
+    'player_run': 6,
+    'obstacle1_level_1': 2,
+    'obstacle2_level_1': 2,
+    'coin_level_1': 2
 }
+
+#Event Coin
+EVENT_COIN = pygame.USEREVENT + 1
+
+#Event Obstacles
+EVENT_OBSTACLE = pygame.USEREVENT + 1
+SPAWN_TIME = 1000
 
 #Instructions
 INSTRUCTION = {
@@ -26,6 +44,9 @@ MENU_OPTION = ("Game - With Player",
                "Instruction",
                "Score",
                 "Exit")
+
+#Player
+PLAYER_SIZE = (256, 256)
 
 #Windows
 WIN_WIDTH = 960
