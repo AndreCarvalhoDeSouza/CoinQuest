@@ -8,6 +8,7 @@ from pygame.font import Font
 from src.Const import COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH
 from src.Entity import Entity
 from src.EntityFactory import EntityFactory
+from src.EntityMediator import EntityMediator
 from src.Obstacle import Obstacle
 from src.Coin import Coin
 
@@ -30,8 +31,6 @@ class Level:
 
         self.coin_spacing = 45
         self.collected_coins = 0
-
-        self.coin_sound = pygame.mixer.Sound('asset/coin.wav')
 
     def run(self):
         pygame.mixer_music.load('asset/levels_song.wav')
@@ -86,18 +85,7 @@ class Level:
 
                 self.entity_list.append(Coin('coin_level_1', (spawn_x, target_y)))
 
-            player_hitbox = pygame.Rect(0, 0, 80, 120)
-            player_hitbox.midbottom = self.player.rect.midbottom
-
-            for ent in self.entity_list[:]:
-                if isinstance(ent, Coin) and player_hitbox.colliderect(ent.rect):
-                    self.coin_sound.play()
-                    self.collected_coins += 1
-                    self.entity_list.remove(ent)
-                    continue
-
-                if (isinstance(ent, Obstacle) or isinstance(ent, Coin)) and ent.rect.right < 0:
-                    self.entity_list.remove(ent)
+            EntityMediator.check_collisions(self.entity_list, self.player, self)
 
             self.window.fill((0, 0, 0))
 

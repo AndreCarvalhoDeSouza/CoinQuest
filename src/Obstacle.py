@@ -1,4 +1,4 @@
-from src.Const import ENTITY_LEVEL1_SPEED, WIN_WIDTH
+from src.Const import ENTITY_LEVEL1_SPEED
 from src.Entity import Entity
 
 class Obstacle(Entity):
