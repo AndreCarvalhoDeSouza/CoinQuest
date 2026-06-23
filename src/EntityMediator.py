@@ -24,7 +24,7 @@ class EntityMediator:
                 continue
 
             if isinstance(ent, Obstacle) and player_hitbox.colliderect(ent.rect):
-                obstacle_hitbox = pygame.Rect(0, 0, 120, 90)
+                obstacle_hitbox = pygame.Rect(0, 0, 60, 50)
                 obstacle_hitbox.centerx = ent.rect.centerx
                 obstacle_hitbox.bottom = ent.rect.bottom
 
@@ -34,6 +34,8 @@ class EntityMediator:
                 if player_hitbox.colliderect(obstacle_hitbox) and not ent.has_collided:
                     collision_sound.play()
                     ent.has_collided = True
+                    player.take_damage()
+                    continue
 
             if (isinstance(ent, Obstacle) or isinstance(ent, Coin)) and ent.rect.right < 0:
                 entity_list.remove(ent)

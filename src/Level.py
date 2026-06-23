@@ -5,7 +5,7 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from src.Const import COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH
+from src.Const import COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH, COLOR_RED
 from src.Entity import Entity
 from src.EntityFactory import EntityFactory
 from src.EntityMediator import EntityMediator
@@ -48,52 +48,63 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+            
+            if not self.player.is_visible:
+                print("Player is completely gone! Game Over triggered.")
+                pygame.mixer_music.stop()
+                return "GAME_OVER"
 
             ground_y = WIN_HEIGHT - 140
             coin_floor_y = ground_y + 40
 
             active_obstacles = [ent for ent in self.entity_list if isinstance(ent, Obstacle)]
 
-            can_spawn_obstacle = False
-            if not active_obstacles:
-                if current_time - self.last_obstacle_spawn > self.next_obstacle_delay:
-                    can_spawn_obstacle = True
-            else:
-                last_obstacle = active_obstacles[-1]
-                free_space = WIN_WIDTH - last_obstacle.rect.right
-                if (current_time - self.last_obstacle_spawn > self.next_obstacle_delay) and (free_space > 350):
-                    can_spawn_obstacle = True
+            if not self.player.is_dead:
+                can_spawn_obstacle = False
+                if not active_obstacles:
+                    if current_time - self.last_obstacle_spawn > self.next_obstacle_delay:
+                        can_spawn_obstacle = True
+                else:
+                    last_obstacle = active_obstacles[-1]
+                    free_space = WIN_WIDTH - last_obstacle.rect.right
+                    if (current_time - self.last_obstacle_spawn > self.next_obstacle_delay) and (free_space > 350):
+                        can_spawn_obstacle = True
 
-            if can_spawn_obstacle:
-                choice = random.choice(('obstacle1_level_1', 'obstacle2_level_1'))
-                new_obstacle = EntityFactory.get_entity(choice)
-                self.entity_list.append(new_obstacle)
+                if can_spawn_obstacle:
+                    choice = random.choice(('obstacle1_level_1', 'obstacle2_level_1'))
+                    new_obstacle = EntityFactory.get_entity(choice)
+                    self.entity_list.append(new_obstacle)
 
-                self.last_obstacle_spawn = current_time
-                self.next_obstacle_delay = random.randint(2000, 3800)
+                    self.last_obstacle_spawn = current_time
+                    self.next_obstacle_delay = random.randint(2000, 3800)
 
-            active_coins = [ent for ent in self.entity_list if isinstance(ent, Coin)]
+                active_coins = [ent for ent in self.entity_list if isinstance(ent, Coin)]
 
-            if not active_coins or (WIN_WIDTH - active_coins[-1].rect.left >= self.coin_spacing):
-                spawn_x = WIN_WIDTH
-                target_y = coin_floor_y
+                if not active_coins or (WIN_WIDTH - active_coins[-1].rect.left >= self.coin_spacing):
+                    spawn_x = WIN_WIDTH
+                    target_y = coin_floor_y
 
-                for obs in active_obstacles:
-                    if obs.rect.right >= spawn_x - 100 and obs.rect.left <= spawn_x + 100:
-                        target_y = obs.rect.top - 60
-                        break
+                    for obs in active_obstacles:
+                        if obs.rect.right >= spawn_x - 100 and obs.rect.left <= spawn_x + 100:
+                            target_y = obs.rect.top - 60
+                            break
 
-                self.entity_list.append(Coin('coin_level_1', (spawn_x, target_y)))
+                    self.entity_list.append(Coin('coin_level_1', (spawn_x, target_y)))
 
             EntityMediator.check_collisions(self.entity_list, self.player, self)
 
             self.window.fill((0, 0, 0))
 
             for ent in self.entity_list:
-                self.window.blit(source=ent.surf, dest=ent.rect)
+                if ent != self.player:
+                    self.window.blit(source=ent.surf, dest=ent.rect)
+
+            if self.player.is_visible:
+                self.window.blit(source=self.player.surf, dest=self.player.rect)
 
             self.level_text(14, f'Level 1 - Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
             self.level_text(16, f'Collected Coins: {self.collected_coins}', COLOR_WHITE, (10, 30))
+            self.level_text(16, f'Lives Left: {self.player.lives}', COLOR_RED, (10, 55))
             self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
             self.level_text(14, f'entities: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
 

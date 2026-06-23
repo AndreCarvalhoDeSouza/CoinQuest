@@ -21,7 +21,9 @@ class EntityFactory:
             case 'player':
                 walk_sprite = Player.load_player('asset/player_walk.png', 64, 64, 3, 2)
                 run_sprite = Player.load_player('asset/player_run.png', 64, 64, 4, 2)
-                current_player = Player('player', (100, ground_y + 10), walk_sprite, run_sprite)
+                hurt_sprite = Player.load_player('asset/player_hurt.png', 64, 64, 3, 2)
+                death_sprite = Player.load_player('asset/player_death.png', 64, 64, 4, 2)
+                current_player = Player('player', (100, ground_y + 10), walk_sprite, run_sprite, hurt_sprite, death_sprite)
                 return current_player
             case 'obstacle1_level_1' | 'obstacle2_level_1':
                 position_y = ground_y - 200

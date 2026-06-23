@@ -2,7 +2,7 @@ import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from src.Const import COLOR_GOLD, COLOR_BLACK, WIN_WIDTH, MENU_OPTION, COLOR_BRONZE
+from src.Const import COLOR_GOLD, COLOR_BLACK, WIN_WIDTH, MENU_OPTION, COLOR_BRONZE, INSTRUCTIONS, COLOR_WHITE
 
 
 class Menu:
@@ -26,9 +26,14 @@ class Menu:
 
             for i in range(len(MENU_OPTION)): # For loop to write the menu options
                 if i == menu_option: # Selected option will be on the color bronze
-                    self.menu_text(40, MENU_OPTION[i], COLOR_BRONZE, ((WIN_WIDTH / 2), 300 + 30 * i))
+                    self.menu_text(40, MENU_OPTION[i], COLOR_BRONZE, ((WIN_WIDTH / 2), 215 + 30 * i))
                 else: # If the option won't be selected, the color will be black
-                    self.menu_text(40, MENU_OPTION[i], COLOR_BLACK, ((WIN_WIDTH / 2), 300 + 30 * i))
+                    self.menu_text(40, MENU_OPTION[i], COLOR_BLACK, ((WIN_WIDTH / 2), 215 + 30 * i))
+
+            self.menu_text(50, "INSTRUCTIONS (below)", COLOR_BLACK, ((WIN_WIDTH / 2), 360))
+
+            for i in range(len(INSTRUCTIONS)):
+                self.menu_text(30, INSTRUCTIONS[i], COLOR_WHITE, ((WIN_WIDTH / 2), 400 + 30 * i))
 
             for event in pygame.event.get():
                 # Check for all event
