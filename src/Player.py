@@ -5,7 +5,9 @@ from src.Entity import Entity
 
 class Player(Entity):
 
-    def __init__(self, name: str, position: tuple, walk_surface: pygame.Surface, run_surface: pygame.Surface, hurt_surface: pygame.Surface, death_surface: pygame.Surface):
+    def __init__(self, name: str, position: tuple, walk_surface: pygame.Surface,
+                 run_surface: pygame.Surface, hurt_surface: pygame.Surface,
+                 death_surface: pygame.Surface):
         super().__init__('player_walk', position)
         new_size = PLAYER_SIZE
 
@@ -126,7 +128,8 @@ class Player(Entity):
             self.speed_y = 0
 
     @staticmethod
-    def load_player(path_file: str, sprite_width: int, sprite_height: int, column: int, row: int):
+    def load_player(path_file: str, sprite_width: int, sprite_height: int,
+                    column: int, row: int):
         spritesheet = pygame.image.load(path_file).convert_alpha()
 
         x = column * sprite_width
