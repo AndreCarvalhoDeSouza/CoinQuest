@@ -110,7 +110,7 @@ class Level:
                             (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 20), center=True)
             self.level_text(20, "You completed CoinQuest perfectly!",
                             COLOR_WHITE, (WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50), center=True)
-            self.level_text(16, "Press ENTER to return to Menu", COLOR_WHITE,
+            self.level_text(16, "Press ENTER to continue", COLOR_WHITE,
                             (WIN_WIDTH / 2, WIN_HEIGHT / 2 + 120), center=True)
 
             for event in pygame.event.get():
