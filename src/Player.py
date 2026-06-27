@@ -3,18 +3,19 @@ import pygame.image
 from src.Const import PLAYER_SIZE, ENTITY_LEVEL1_SPEED, WIN_WIDTH
 from src.Entity import Entity
 
+
 class Player(Entity):
 
-    def __init__(self, name: str, position: tuple, walk_surface: pygame.Surface,
+    def __init__(self, position: tuple, walk_surface: pygame.Surface,
                  run_surface: pygame.Surface, hurt_surface: pygame.Surface,
                  death_surface: pygame.Surface):
         super().__init__('player_walk', position)
         new_size = PLAYER_SIZE
 
-        self.sprite_walk = pygame.transform.scale(walk_surface, new_size)
-        self.sprite_run = pygame.transform.scale(run_surface, new_size)
-        self.sprite_hurt = pygame.transform.scale(hurt_surface, new_size)
-        self.sprite_death = pygame.transform.scale(death_surface, new_size)
+        self.sprite_walk = pygame.transform.scale(walk_surface, new_size).convert_alpha()
+        self.sprite_run = pygame.transform.scale(run_surface, new_size).convert_alpha()
+        self.sprite_hurt = pygame.transform.scale(hurt_surface, new_size).convert_alpha()
+        self.sprite_death = pygame.transform.scale(death_surface, new_size).convert_alpha()
 
         self.surf = self.sprite_walk
         self.rect = self.surf.get_rect(bottomleft=position)

@@ -1,11 +1,10 @@
 import pygame
 
-#Coin
+#C
 COIN_SIZE = (32, 32)
-COIN_GOAL_LEVEL1 = 2
-COIN_GOAL_LEVEL2 = 4
+COIN_GOAL_LEVEL1 = 100
+COIN_GOAL_LEVEL2 = 200
 
-#Colors
 COLOR_GOLD = (162, 169, 29)
 COLOR_BLACK = (0, 0, 0)
 COLOR_BRONZE = (205, 127, 50)
@@ -13,55 +12,60 @@ COLOR_WHITE = (255, 255, 255)
 COLOR_RED = (255, 0, 0)
 COLOR_DARK_GREEN = (0, 100, 0)
 
-#Entities
+#E
 ENTITY_LEVEL1_SPEED = {
     'level1_background0': 0,
-    'level1_background1': 4,
-    'level1_background2': 8,
-    'level1_background3': 12,
-    'level1_background4': 16,
+    'level1_background1': 1,
+    'level1_background2': 2,
+    'level1_background3': 3,
+    'level1_background4': 4,
     'level2_background0': 0,
-    'level2_background1': 4,
-    'level2_background2': 8,
-    'level2_background3': 12,
-    'level2_background4': 16,
-    'level2_background5': 20,
-    'level2_background6': 24,
+    'level2_background1': 1,
+    'level2_background2': 2,
+    'level2_background3': 3,
+    'level2_background4': 4,
+    'level2_background5': 5,
+    'level2_background6': 6,
     'player_walk': 3,
-    'player_run': 9,
-    'obstacle1_level_1': 2,
-    'obstacle2_level_1': 2,
-    'obstacle1_level_2': 2,
-    'obstacle2_level_2': 2,
-    'obstacle3_level_2': 2,
-    'coin_level_1': 2,
-    'coin_level_2': 2
+    'player_run': 6,
+    'obstacle1_level_1': 3,
+    'obstacle2_level_1': 3,
+    'obstacle1_level_2': 3,
+    'obstacle2_level_2': 3,
+    'obstacle3_level_2': 3,
+    'coin_level_1': 3,
+    'coin_level_2': 3
 }
 
-#Event Coin
 EVENT_COIN = pygame.USEREVENT + 2
 
-#Event Obstacles
 EVENT_OBSTACLE = pygame.USEREVENT + 1
 
-#Instructions
-INSTRUCTIONS = ("Left Arrow Key - Run forward",
-    "Right Arrow Key - Move backwards and avoid obstacles",
+#I
+INSTRUCTIONS_MENU = ("Left Arrow Key - Run forward  (Player)",
+    "Right Arrow Key - Move backwards  (Player)",
     "Up and Down Arrow Key - Navigate the menu options",
-    "Space (pressed) - Jump and float",
+    "Space (pressed) - Jump and float to avoid obstacles (Player)",
 )
 
-#Menu
+INSTRUCTIONS_LEVEL = ("1. At level 1, the player must collect 100 coins",
+    "2. But at level 2, the player must collect 200 coins",
+    "3. By level, the player has 3 lives",
+    "4. If the player hits an obstacle, he will lose a life",
+    "5. If the player loses all 3 lives, the game is over"
+)
+
+#M
 MENU_OPTION = ("Game - With Player",
                "Score",
                 "Exit")
 
-#Player
+#P
 PLAYER_SIZE = (256, 256)
 
-#Spawn Time
+#S
 SPAWN_TIME = 1000
 
-#Windows
+#W
 WIN_WIDTH = 960
 WIN_HEIGHT = 540

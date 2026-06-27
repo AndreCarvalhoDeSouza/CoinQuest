@@ -5,8 +5,9 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from src.Const import (COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH,
-                       COLOR_RED, COIN_GOAL_LEVEL1, COIN_GOAL_LEVEL2, COLOR_GOLD)
+from src.Const import (COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH, COLOR_RED,
+                       COIN_GOAL_LEVEL1, COIN_GOAL_LEVEL2, COLOR_GOLD,
+                       COLOR_DARK_GREEN, INSTRUCTIONS_LEVEL, COLOR_BLACK)
 from src.Entity import Entity
 from src.EntityFactory import EntityFactory
 from src.EntityMediator import EntityMediator
@@ -33,10 +34,43 @@ class Level:
         self.coin_spacing = 45
         self.collected_coins = 0
 
+        self.fonts = {
+            14: pygame.font.SysFont('Lucida Sans Typewriter', 14),
+            16: pygame.font.SysFont('Lucida Sans Typewriter', 16),
+            20: pygame.font.SysFont('Lucida Sans Typewriter', 20),
+            24: pygame.font.SysFont('Lucida Sans Typewriter', 24),
+            40: pygame.font.SysFont('Lucida Sans Typewriter', 40),
+            50: pygame.font.SysFont('Lucida Sans Typewriter', 50),
+            60: pygame.font.SysFont('Lucida Sans Typewriter', 60)
+        }
+
         if self.name == 'level1':
             self.coins_goals = COIN_GOAL_LEVEL1
         else:
             self.coins_goals = COIN_GOAL_LEVEL2
+
+    def show_instructions_screen(self):
+
+        while True:
+            self.window.fill(COLOR_DARK_GREEN)
+
+            for i in range(len(INSTRUCTIONS_LEVEL)):
+                self.level_text(24, INSTRUCTIONS_LEVEL[i],
+                            COLOR_WHITE, ((WIN_WIDTH / 2), 50 + 40 * i), center=True)
+
+            self.level_text(16, 'Press ENTER to continue',
+                            COLOR_WHITE, ((WIN_WIDTH / 2), 430), center=True)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        return
+
+            pygame.display.flip()
 
     def show_game_over_screen(self):
         pygame.mixer_music.stop()
@@ -46,7 +80,7 @@ class Level:
 
         while True:
             clock.tick(60)
-            self.window.fill((0, 0, 0))
+            self.window.fill(COLOR_BLACK)
 
             self.level_text(60, "GAME OVER", COLOR_RED,
                             (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 50), center=True)
@@ -76,7 +110,7 @@ class Level:
         while True:
             clock.tick(60)
             current_time = pygame.time.get_ticks()
-            self.window.fill((0, 100, 0))  # Dark green thematic transition background
+            self.window.fill(COLOR_DARK_GREEN)
 
             self.level_text(60, "LEVEL UP!", COLOR_GOLD,
                             (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 30), center=True)
@@ -102,7 +136,7 @@ class Level:
 
         while True:
             clock.tick(60)
-            self.window.fill((0, 0, 0))
+            self.window.fill(COLOR_BLACK)
 
             self.level_text(50, "CONGRATULATIONS!", COLOR_GOLD,
                             (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 80), center=True)
@@ -181,8 +215,13 @@ class Level:
 
                 active_coins = [ent for ent in self.entity_list if isinstance(ent, Coin)]
 
-                if (not active_coins or
-                        (WIN_WIDTH - active_coins[-1].rect.left >= self.coin_spacing)):
+                should_spawn_coin = False
+                if not active_coins:
+                    should_spawn_coin = True
+                elif WIN_WIDTH - active_coins[-1].rect.left >= self.coin_spacing:
+                    should_spawn_coin = True
+
+                if should_spawn_coin:
                     spawn_x = WIN_WIDTH
                     target_y = coin_floor_y
 
@@ -201,7 +240,7 @@ class Level:
 
             EntityMediator.check_collisions(self.entity_list, self.player, self)
 
-            self.window.fill((0, 0, 0))
+            self.window.fill(COLOR_BLACK)
 
             for ent in self.entity_list:
                 if ent != self.player:
@@ -235,7 +274,7 @@ class Level:
 
     def level_text(self, text_size: int, text: str, text_color: tuple,
                    text_pos: tuple, center: bool = False):
-        text_font: Font = pygame.font.SysFont(name='Lucida Sans Typewriter', size=text_size)
+        text_font: Font = self.fonts[text_size]
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         if center:
             text_rect: Rect = text_surf.get_rect(center=text_pos)

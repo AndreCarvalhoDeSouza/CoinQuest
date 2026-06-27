@@ -4,7 +4,7 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from src.Const import COLOR_BLACK, WIN_WIDTH
+from src.Const import COLOR_BLACK, WIN_WIDTH, COLOR_GOLD
 
 
 class Score:
@@ -37,14 +37,15 @@ class Score:
             self.window.blit(self.surf, self.rect)
 
             self.score_text(48, "SCORE", COLOR_BLACK, (WIN_WIDTH / 2, 40))
+            self.score_text(18, "*Press ESC to return to the menu", COLOR_GOLD, (WIN_WIDTH / 2 , 75))
 
-            self.score_text(28, "LEVEL 1", COLOR_BLACK, (WIN_WIDTH / 2, 90))
-            self.score_text_left(18, "NAME", COLOR_BLACK, (120, 120))
-            self.score_text_left(18, "COINS", COLOR_BLACK, (320, 120))
-            self.score_text_left(18, "LIVES", COLOR_BLACK, (470, 120))
-            self.score_text_left(18, "DATE", COLOR_BLACK, (650, 120))
+            self.score_text(28, "LEVEL 1", COLOR_BLACK, (WIN_WIDTH / 2, 120))
+            self.score_text_left(18, "NAME", COLOR_BLACK, (120, 150))
+            self.score_text_left(18, "COINS", COLOR_BLACK, (320, 150))
+            self.score_text_left(18, "LIVES", COLOR_BLACK, (470, 150))
+            self.score_text_left(18, "DATE", COLOR_BLACK, (650, 150))
 
-            y = 150
+            y = 180
 
             for score in self.scores:
 

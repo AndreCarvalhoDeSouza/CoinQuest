@@ -1,6 +1,8 @@
 import pygame
+
 from src.Coin import Coin
 from src.Obstacle import Obstacle
+
 
 class EntityMediator:
 

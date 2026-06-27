@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 
 from src.Const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION
@@ -10,9 +12,14 @@ class Game:
     def __init__(self):
         pygame.init()
         self.window = pygame.display.set_mode(size=(WIN_WIDTH, WIN_HEIGHT))
+        pygame.display.set_caption("CoinQuest")
 
         self.score = Score(self.window)
-        self.level1_result = None
+        self.level1_result = {
+            "level": "Level 1",
+            "coins": 0,
+            "lives": 3
+        }
 
     def run(self):
         while True:
@@ -21,8 +28,20 @@ class Game:
             menu_return = menu.run()
 
             if menu_return == MENU_OPTION[0]:
+
+                self.level1_result = {
+                    "level": "Level 1",
+                    "coins": 0,
+                    "lives": 3
+                }
+
                 level = Level(self.window, 'level1', menu_return)
+                level.show_instructions_screen()
                 level_return = level.run()
+
+                if level_return == 'GAME_OVER':
+                    continue
+
                 if level_return == 'LEVEL_CLEARED':
                     self.level1_result = {
                         "coins": level.collected_coins,
@@ -31,6 +50,10 @@ class Game:
                     }
                     level = Level(self.window, 'level2', menu_return)
                     level_return = level.run()
+
+                    if level_return == 'GAME_OVER':
+                        continue
+
                     if level_return == 'VICTORY':
                         name = self.score.input_name()
 
@@ -58,4 +81,5 @@ class Game:
                 pygame.quit()
                 quit()
             else:
-                pass
+                pygame.quit()
+                sys.exit()

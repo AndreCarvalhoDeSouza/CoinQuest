@@ -3,7 +3,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from src.Const import (COLOR_GOLD, COLOR_BLACK, WIN_WIDTH, MENU_OPTION,
-                       COLOR_BRONZE, INSTRUCTIONS, COLOR_WHITE)
+                       COLOR_BRONZE, INSTRUCTIONS_MENU, COLOR_WHITE)
 
 
 class Menu:
@@ -36,8 +36,8 @@ class Menu:
             self.menu_text(38, "--- INSTRUCTIONS (below) ---",
                            COLOR_BLACK, ((WIN_WIDTH / 2), 340))
 
-            for i in range(len(INSTRUCTIONS)):
-                self.menu_text(19, INSTRUCTIONS[i], COLOR_WHITE,
+            for i in range(len(INSTRUCTIONS_MENU)):
+                self.menu_text(19, INSTRUCTIONS_MENU[i], COLOR_WHITE,
                                ((WIN_WIDTH / 2), 380 + 30 * i))
 
             for event in pygame.event.get():

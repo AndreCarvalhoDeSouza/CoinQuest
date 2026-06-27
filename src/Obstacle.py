@@ -1,6 +1,7 @@
 from src.Const import ENTITY_LEVEL1_SPEED
 from src.Entity import Entity
 
+
 class Obstacle(Entity):
 
     def __init__(self, name: str, position: tuple):
