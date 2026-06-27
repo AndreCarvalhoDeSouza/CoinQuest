@@ -12,6 +12,13 @@ class Menu:
         self.surf = pygame.image.load('asset/bg_menu.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
+        self.fonts = {
+            19: pygame.font.SysFont('Press Start 2P', 19),
+            38: pygame.font.SysFont('Press Start 2P', 38),
+            40: pygame.font.SysFont('Press Start 2P', 40),
+            100: pygame.font.SysFont('Press Start 2P', 100)
+        }
+
     def run(self, ): # Running method
         menu_option = 0 # First menu option
         pygame.mixer_music.load('asset/menu.wav')
@@ -60,7 +67,7 @@ class Menu:
             pygame.display.flip()
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font: Font = pygame.font.SysFont(name="Press Start 2P", size=text_size)
+        text_font: Font = self.fonts[text_size]
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)

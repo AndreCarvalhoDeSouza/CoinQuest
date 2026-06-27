@@ -7,7 +7,7 @@ from pygame.font import Font
 
 from src.Const import (COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH, COLOR_RED,
                        COIN_GOAL_LEVEL1, COIN_GOAL_LEVEL2, COLOR_GOLD,
-                       COLOR_DARK_GREEN, INSTRUCTIONS_LEVEL, COLOR_BLACK)
+                       COLOR_DARK_GREEN, INSTRUCTIONS_LEVEL, COLOR_BLACK, COLOR_BRONZE)
 from src.Entity import Entity
 from src.EntityFactory import EntityFactory
 from src.EntityMediator import EntityMediator
@@ -251,24 +251,21 @@ class Level:
 
             if self.name == 'level1':
                 display_name = 'Level 1'
+                self.level_text(16,
+                                f'Collected Coins: {self.collected_coins}',
+                                COLOR_GOLD, (10, 30))
             else:
                 display_name = 'Level 2'
+                self.level_text(16,
+                                f'Collected Coins: {self.collected_coins}',
+                                COLOR_BRONZE, (10, 30))
 
             self.level_text(14,
-                            f'{display_name} - Timeout: {self.timeout / 1000 :.1f}s',
-                            COLOR_WHITE, (10, 5))
-            self.level_text(16,
-                            f'Collected Coins: {self.collected_coins}',
-                            COLOR_WHITE, (10, 30))
+                            f'{display_name}',
+                            COLOR_BLACK, (10, 5))
             self.level_text(16,
                             f'Lives Left: {self.player.lives}',
                             COLOR_RED, (10, 55))
-            self.level_text(14,
-                            f'fps: {clock.get_fps() :.0f}',
-                            COLOR_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(14,
-                            f'entities: {len(self.entity_list)}',
-                            COLOR_WHITE, (10, WIN_HEIGHT - 20))
 
             pygame.display.flip()
 

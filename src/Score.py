@@ -14,6 +14,14 @@ class Score:
         self.rect = self.surf.get_rect(left=0, top=0)
         self.scores = []
 
+        self.fonts = {
+            16: pygame.font.SysFont('Lucida Sans Typewriter', 16),
+            18: pygame.font.SysFont('Lucida Sans Typewriter', 18),
+            24: pygame.font.SysFont('Lucida Sans Typewriter', 24),
+            28: pygame.font.SysFont('Lucida Sans Typewriter', 28),
+            48: pygame.font.SysFont('Lucida Sans Typewriter', 48)
+        }
+
     def save(self, name: str, level: str, coins: int, lives: int):
 
         self.scores.append({
@@ -207,7 +215,7 @@ class Score:
             pygame.display.flip()
 
     def score_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
+        text_font: Font = self.fonts[text_size]
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
